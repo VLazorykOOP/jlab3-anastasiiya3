@@ -1,0 +1,80 @@
+// Базовий клас
+class Product {
+    protected String name;
+    protected double price;
+    protected String manufacturer;
+    
+    public Product(String name, double price, String manufacturer) {
+        this.name = name;
+        this.price = price;
+        this.manufacturer = manufacturer;
+    }
+    
+    public void Show() {
+        System.out.println("Назва: " + name);
+        System.out.println("Ціна: " + price + " грн");
+        System.out.println("Виробник: " + manufacturer);
+    }
+}
+
+// Похідний клас Товар
+class Item extends Product {
+    private String category;
+    private int quantity;
+    
+    public Item(String name, double price, String manufacturer, String category, int quantity) {
+        super(name, price, manufacturer);
+        this.category = category;
+        this.quantity = quantity;
+    }
+    
+    @Override
+    public void Show() {
+        System.out.println("=== ТОВАР ===");
+        super.Show();
+        System.out.println("Категорія: " + category);
+        System.out.println("Кількість: " + quantity);
+        System.out.println();
+    }
+}
+
+// Похідний клас Молочний продукт
+class DairyProduct extends Product {
+    private String expirationDate;
+    private double fatContent;
+    
+    public DairyProduct(String name, double price, String manufacturer, String expirationDate, double fatContent) {
+        super(name, price, manufacturer);
+        this.expirationDate = expirationDate;
+        this.fatContent = fatContent;
+    }
+    
+    @Override
+    public void Show() {
+        System.out.println("=== МОЛОЧНИЙ ПРОДУКТ ===");
+        super.Show();
+        System.out.println("Термін придатності: " + expirationDate);
+        System.out.println("Вміст жиру: " + fatContent + "%");
+        System.out.println();
+    }
+}
+
+// Головний клас програми
+public class Task1 {
+    public static void main(String[] args) {
+        // Створення масиву продуктів
+        Product[] products = new Product[4];
+        
+        // Заповнення масиву
+        products[0] = new Item("Ноутбук", 25000, "Dell", "Електроніка", 5);
+        products[1] = new DairyProduct("Молоко", 35.50, "Гадячсир", "2024-12-25", 2.5);
+        products[2] = new Item("Книга", 150, "Видавництво А-БА-БА-ГА-ЛА-МА-ГА", "Література", 10);
+        products[3] = new DairyProduct("Сир", 89.90, "Ферма", "2024-12-20", 25.0);
+        
+        // Виведення інформації про всі продукти
+        System.out.println("=== ІНФОРМАЦІЯ ПРО ПРОДУКТИ ===\n");
+        for (Product product : products) {
+            product.Show();
+        }
+    }
+}
